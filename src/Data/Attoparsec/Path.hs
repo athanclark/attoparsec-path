@@ -1,7 +1,7 @@
 module Data.Attoparsec.Path (rootPath, relFilePath, absFilePath, relDirPath, absDirPath) where
 
+import Data.Char (isControl, isSpace)
 import Data.Attoparsec.Text (Parser, char, takeWhile1)
-import Data.Functor.Identity (Identity (..))
 import qualified Data.Text as T
 import Control.Applicative (Alternative (..))
 import Path (Path, File, Dir, Abs, Rel, (</>))
@@ -15,12 +15,12 @@ rootPath =
 
 chunkPath :: Parser (Path Rel File)
 chunkPath =
-  (unsafeCoerce . T.unpack) <$> takeWhile1 (/= '/')
+  (unsafeCoerce . T.unpack) <$> takeWhile1 (\c -> not (isControl c || isSpace c) && c /= '/')
 
 relFilePath :: Parser (Path Rel File)
 relFilePath =
   let parseComplex =
-        (\head tail -> unsafeCoerce (unsafeCoerce head ++ unsafeCoerce tail))
+        (\h t -> unsafeCoerce (unsafeCoerce h ++ unsafeCoerce t))
           <$> chunkPath <*> absFilePath
       parseSimple = chunkPath
   in  parseComplex <|> parseSimple

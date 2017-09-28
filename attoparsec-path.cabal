@@ -1,5 +1,5 @@
 name:                attoparsec-path
-version:             0.0.0
+version:             0.0.0.1
 synopsis:            Convenience bindings between path and attoparsec
 -- description:
 homepage:            https://github.com/athanclark/attoparsec-path#readme
