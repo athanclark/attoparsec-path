@@ -4,7 +4,7 @@ import Data.Attoparsec.Text (Parser, char, takeWhile1)
 import Data.Functor.Identity (Identity (..))
 import qualified Data.Text as T
 import Control.Applicative (Alternative (..))
-import Path (Path, File, Dir, Abs, Rel, (</>), parseRelDir, parseAbsDir, parseRelFile, parseAbsFile)
+import Path (Path, File, Dir, Abs, Rel, (</>))
 import Unsafe.Coerce (unsafeCoerce)
 
 
